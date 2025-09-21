@@ -1,0 +1,314 @@
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Discover"),
+          BottomNavigationBarItem(icon: Icon(Icons.sports), label: "Matches"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.bar_chart), label: "Leaderboard"),
+          BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet), label: "Wallet"),
+        ],
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Sports Olymps",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Icon(Icons.notifications_none, size: 28),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // Search Bar
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.grey.shade200,
+                ),
+                child: const TextField(
+                  decoration: InputDecoration(
+                    hintText: "Search sports, teams, or players...",
+                    border: InputBorder.none,
+                    icon: Icon(Icons.search),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Quick Actions
+              const Text(
+                "Quick Actions",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16
+                ),
+              ),
+              const SizedBox(height: 12),
+              GridView.count(
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  _quickActionCard(Icons.sports_tennis, "Create Match", Colors.blue.shade50),
+                  _quickActionCard(Icons.group, "Find Opponent", Colors.red.shade100),
+                  _quickActionCard(Icons.emoji_events, "My Challenges", Colors.blue.shade50),
+                  _quickActionCard(Icons.calendar_today, "My Next Match", Colors.red.shade100),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // Latest Updates
+              const Text(
+                "Latest Updates",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              const SizedBox(height: 12),
+
+              _updateCard("Jessica A.", "2 hours ago",
+                  "Jessica A. won her tennis match against Mark T. with a score of 6-4, 6-2!",
+                  "https://randomuser.me/api/portraits/women/44.jpg"),
+              const SizedBox(height: 12),
+              _updateCard("Coach Miller", "Yesterday",
+                  "New tip: Improve your serve with these 3 essential drills. Check out the full guide in Discover!",
+                  "https://randomuser.me/api/portraits/men/32.jpg"),
+
+              const SizedBox(height: 12),
+              Center(
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text("View All Results >"),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // Leaderboard
+              const Text(
+                "Leaderboard",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              const SizedBox(height: 12),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _chip("City", true),
+                  _chip("State", false),
+                  _chip("National", false),
+                ],
+              ),
+              const SizedBox(height: 12),
+
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  children: const [
+                    _leaderboardRow("1", "Alex Johnson", "1500 pts"),
+                    Divider(),
+                    _leaderboardRow("2", "Maria Santos", "1480 pts"),
+                    Divider(),
+                    _leaderboardRow("3", "David Lee", "1450 pts"),
+                    Divider(),
+                    _leaderboardRow("4", "Sarah Chen", "1420 pts"),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              Center(
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text("View All Rankings >"),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // Wallet
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.orange.shade100, Colors.red.shade100],
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "My Wallet",
+                      style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      "Current Balance",
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    const SizedBox(height: 4),
+                    const Text(
+                      "₹125.50",
+                      style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    ),
+                    const Text(
+                      "50 Bonus Credits",
+                      style: TextStyle(color: Colors.orange),
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 45,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.redAccent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                          "Add Money",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 20),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// Quick Action Card
+Widget _quickActionCard(IconData icon, String text, Color bgColor) {
+  return Container(
+    decoration: BoxDecoration(
+      color: bgColor,
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 28, color: Colors.black87),
+          const SizedBox(height: 6),
+          Text(text, style: const TextStyle(fontWeight: FontWeight.w600)),
+        ],
+      ),
+    ),
+  );
+}
+
+// Updates Card
+Widget _updateCard(String name, String time, String content, String imageUrl) {
+  return Container(
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.grey.shade300),
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: NetworkImage(imageUrl),
+              radius: 20,
+            ),
+            const SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(name,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(time, style: const TextStyle(color: Colors.grey)),
+              ],
+            ),
+            const Spacer(),
+            const Icon(Icons.share, size: 20, color: Colors.grey),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Text(content),
+      ],
+    ),
+  );
+}
+
+// Chip
+Widget _chip(String text, bool selected) {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+    decoration: BoxDecoration(
+      color: selected ? Colors.blue.shade100 : Colors.grey.shade200,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Text(
+      text,
+      style: TextStyle(
+        color: selected ? Colors.blue : Colors.black87,
+        fontWeight: FontWeight.w600,
+      ),
+    ),
+  );
+}
+
+// Leaderboard Row
+class _leaderboardRow extends StatelessWidget {
+  final String rank;
+  final String player;
+  final String score;
+
+  const _leaderboardRow(this.rank, this.player, this.score);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(rank, style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text(player),
+          Text(score, style: const TextStyle(fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
+}
