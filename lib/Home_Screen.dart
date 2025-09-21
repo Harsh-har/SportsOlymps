@@ -25,15 +25,17 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    "Sports Olymps",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        "Sports Olymps",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                   Icon(Icons.notifications_none, size: 28),
@@ -46,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: Colors.grey.shade200,
+                  color: Color(0xFFF3F4F6),
                 ),
                 child: const TextField(
                   decoration: InputDecoration(
@@ -73,13 +75,15 @@ class HomeScreen extends StatelessWidget {
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
                 physics: const NeverScrollableScrollPhysics(),
+                childAspectRatio: 2.2, // 👈 width badha, height kam ho gaya
                 children: [
-                  _quickActionCard(Icons.sports_tennis, "Create Match", Colors.blue.shade50),
-                  _quickActionCard(Icons.group, "Find Opponent", Colors.red.shade100),
-                  _quickActionCard(Icons.emoji_events, "My Challenges", Colors.blue.shade50),
-                  _quickActionCard(Icons.calendar_today, "My Next Match", Colors.red.shade100),
+                  _quickActionCard(Icons.sports_tennis, "Create Match", Color(0xFFF2F4FD)),
+                  _quickActionCard(Icons.group, "Find Opponent", Color(0xFFFCE1DE)),
+                  _quickActionCard(Icons.emoji_events, "My Challenges", Color(0xFFF2F4FD)),
+                  _quickActionCard(Icons.calendar_today, "My Next Match",Color(0xFFFCE1DE)),
                 ],
               ),
+
               const SizedBox(height: 20),
 
               // Latest Updates
@@ -101,7 +105,7 @@ class HomeScreen extends StatelessWidget {
               Center(
                 child: TextButton(
                   onPressed: () {},
-                  child: const Text("View All Results >"),
+                  child: const Text("View All Results >",style: TextStyle(color: Color(0xFF5774EA)),),
                 ),
               ),
 
@@ -145,7 +149,7 @@ class HomeScreen extends StatelessWidget {
               Center(
                 child: TextButton(
                   onPressed: () {},
-                  child: const Text("View All Rankings >"),
+                  child: const Text("View All Rankings >",style: TextStyle(color: Color(0xFF5774EA)),),
                 ),
               ),
 
@@ -156,7 +160,7 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.orange.shade100, Colors.red.shade100],
+                    colors: [Color(0xFFFACFC9), Color(0xFFFFEBE8)],
                   ),
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -174,22 +178,29 @@ class HomeScreen extends StatelessWidget {
                       style: TextStyle(color: Colors.black54),
                     ),
                     const SizedBox(height: 4),
-                    const Text(
-                      "₹125.50",
-                      style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    Row(
+                      children: [
+                        const Text(
+                          "₹125.50",
+                          style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                        SizedBox(width: 20,),
+                        Text(
+                          "50 Bonus Credits",
+                          style: TextStyle(color: Colors.orange),
+                        ),
+                      ],
+
                     ),
-                    const Text(
-                      "50 Bonus Credits",
-                      style: TextStyle(color: Colors.orange),
-                    ),
+
                     const SizedBox(height: 12),
                     SizedBox(
                       width: double.infinity,
                       height: 45,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.redAccent,
+                          backgroundColor: Color(0xFFF1705F),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
