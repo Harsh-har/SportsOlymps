@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'CreateMatch_Screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,9 +14,8 @@ class HomeScreen extends StatelessWidget {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: "Discover"),
-          BottomNavigationBarItem(icon: Icon(Icons.sports), label: "Matches"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.bar_chart), label: "Leaderboard"),
+          BottomNavigationBarItem(icon: Icon(Icons.emoji_events), label: "Matches"),
+          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: "Leaderboard"),
           BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet), label: "Wallet"),
         ],
       ),
@@ -25,30 +25,32 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // ✅ AppBar Row
               Row(
                 children: [
                   Expanded(
                     child: Center(
                       child: Text(
                         "Sports Olymps",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
-                  Icon(Icons.notifications_none, size: 28),
+                  const Icon(Icons.notifications_none, size: 28),
                 ],
               ),
+
               const SizedBox(height: 16),
 
-              // Search Bar
+              // ✅ Search Bar
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: Color(0xFFF3F4F6),
+                  color: const Color(0xFFF3F4F6),
                 ),
                 child: const TextField(
                   decoration: InputDecoration(
@@ -58,108 +60,203 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
               const SizedBox(height: 20),
 
-              // Quick Actions
+              // ✅ Quick Actions
               const Text(
                 "Quick Actions",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               const SizedBox(height: 12),
+
               GridView.count(
                 crossAxisCount: 2,
                 shrinkWrap: true,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
                 physics: const NeverScrollableScrollPhysics(),
-                childAspectRatio: 2.2, // 👈 width badha, height kam ho gaya
+                childAspectRatio: 2.8,
                 children: [
-                  _quickActionCard(Icons.sports_tennis, "Create Match", Color(0xFFF2F4FD)),
-                  _quickActionCard(Icons.group, "Find Opponent", Color(0xFFFCE1DE)),
-                  _quickActionCard(Icons.emoji_events, "My Challenges", Color(0xFFF2F4FD)),
-                  _quickActionCard(Icons.calendar_today, "My Next Match",Color(0xFFFCE1DE)),
+                  _quickActionCard(
+                    context,
+                    Icons.sports_tennis,
+                    "Create Match",
+                    const Color(0xFFF2F4FD),
+                    const SportsSelectionScreen(),
+                    const Color(0xFF5774EA),
+                  ),
+                  _quickActionCard(
+                    context,
+                    Icons.group,
+                    "Find Opponent",
+                    const Color(0xFFFCE1DE),
+                    const SportsSelectionScreen(),
+                    const Color(0xFFF1705F),
+                  ),
+                  _quickActionCard(
+                    context,
+                    Icons.emoji_events,
+                    "My Challenges",
+                    const Color(0xFFF2F4FD),
+                    const SportsSelectionScreen(),
+                    const Color(0xFF5774EA),
+                  ),
+                  _quickActionCard(
+                    context,
+                    Icons.calendar_today,
+                    "My Next Match",
+                    const Color(0xFFFCE1DE),
+                    const SportsSelectionScreen(),
+                    const Color(0xFFF1705F),
+                  ),
                 ],
               ),
 
               const SizedBox(height: 20),
 
-              // Latest Updates
+              // ✅ Latest Updates
               const Text(
                 "Latest Updates",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               const SizedBox(height: 12),
 
-              _updateCard("Jessica A.", "2 hours ago",
-                  "Jessica A. won her tennis match against Mark T. with a score of 6-4, 6-2!",
-                  "https://randomuser.me/api/portraits/women/44.jpg"),
+              _updateCard(
+                "Jessica A.",
+                "2 hours ago",
+                "Jessica A. won her tennis match against Mark T. with a score of 6-4, 6-2!",
+                "https://randomuser.me/api/portraits/women/44.jpg",
+              ),
               const SizedBox(height: 12),
-              _updateCard("Coach Miller", "Yesterday",
-                  "New tip: Improve your serve with these 3 essential drills. Check out the full guide in Discover!",
-                  "https://randomuser.me/api/portraits/men/32.jpg"),
+
+              _updateCard(
+                "Coach Miller",
+                "Yesterday",
+                "New tip: Improve your serve with these 3 essential drills. Check out the full guide in Discover!",
+                "https://randomuser.me/api/portraits/men/32.jpg",
+              ),
 
               const SizedBox(height: 12),
               Center(
                 child: TextButton(
                   onPressed: () {},
-                  child: const Text("View All Results >",style: TextStyle(color: Color(0xFF5774EA)),),
+                  child: const Text(
+                    "View All Results >",
+                    style: TextStyle(color: Color(0xFF5774EA)),
+                  ),
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 50),
 
-              // Leaderboard
-              const Text(
-                "Leaderboard",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              const SizedBox(height: 12),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // ✅ Leaderboard Section
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _chip("City", true),
-                  _chip("State", false),
-                  _chip("National", false),
+                  // Title + Chips Row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Leaderboard",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                      Row(
+                        children: [
+                          _chip("City", true),
+                          const SizedBox(width: 8),
+                          _chip("State", false),
+                          const SizedBox(width: 8),
+                          _chip("National", false),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // Table Style Leaderboard
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade300),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      children: [
+                        // Header Row
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12),
+                            ),
+                          ),
+                          child: const Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Text("Rank",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontWeight: FontWeight.w600)),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Text("Player",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(fontWeight: FontWeight.w600)),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Text("Score",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontWeight: FontWeight.w600)),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        const Divider(height: 1),
+
+                        // Leaderboard Rows
+                        const _leaderboardRow("1", "Alex Johnson", "1500 pts"),
+                        const Divider(height: 1),
+                        const _leaderboardRow("2", "Maria Santos", "1480 pts"),
+                        const Divider(height: 1),
+                        const _leaderboardRow("3", "David Lee", "1450 pts"),
+                        const Divider(height: 1),
+                        const _leaderboardRow("4", "Sarah Chen", "1420 pts"),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // View All Rankings Link
+                  Center(
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        "View All Rankings",
+                        style: TextStyle(
+                          color: Color(0xFF5774EA),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(height: 12),
-
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Column(
-                  children: const [
-                    _leaderboardRow("1", "Alex Johnson", "1500 pts"),
-                    Divider(),
-                    _leaderboardRow("2", "Maria Santos", "1480 pts"),
-                    Divider(),
-                    _leaderboardRow("3", "David Lee", "1450 pts"),
-                    Divider(),
-                    _leaderboardRow("4", "Sarah Chen", "1420 pts"),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 12),
-              Center(
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text("View All Rankings >",style: TextStyle(color: Color(0xFF5774EA)),),
-                ),
-              ),
 
               const SizedBox(height: 20),
 
-              // Wallet
+              // ✅ Wallet
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     colors: [Color(0xFFFACFC9), Color(0xFFFFEBE8)],
                   ),
                   borderRadius: BorderRadius.circular(12),
@@ -169,8 +266,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     const Text(
                       "My Wallet",
-                      style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                     const SizedBox(height: 8),
                     const Text(
@@ -182,25 +278,24 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const Text(
                           "₹125.50",
-                          style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                         ),
-                        SizedBox(width: 20,),
-                        Text(
+                        const SizedBox(width: 20),
+                        const Text(
                           "50 Bonus Credits",
-                          style: TextStyle(color: Colors.orange),
+                          style: TextStyle(color: Color(0xFFE06900)),
                         ),
                       ],
-
                     ),
 
                     const SizedBox(height: 12),
+
                     SizedBox(
                       width: double.infinity,
                       height: 45,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFF1705F),
+                          backgroundColor: const Color(0xFFF1705F),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -225,27 +320,42 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// Quick Action Card
-Widget _quickActionCard(IconData icon, String text, Color bgColor) {
-  return Container(
-    decoration: BoxDecoration(
-      color: bgColor,
-      borderRadius: BorderRadius.circular(12),
-    ),
-    child: Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 28, color: Colors.black87),
-          const SizedBox(height: 6),
-          Text(text, style: const TextStyle(fontWeight: FontWeight.w600)),
-        ],
+// ✅ Quick Action Card with Navigation + Icon Color
+Widget _quickActionCard(
+    BuildContext context,
+    IconData icon,
+    String text,
+    Color bgColor,
+    Widget nextScreen,
+    Color iconColor,
+    ) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => nextScreen),
+      );
+    },
+    child: Container(
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 28, color: iconColor),
+            const SizedBox(height: 6),
+            Text(text, style: const TextStyle(fontWeight: FontWeight.w600)),
+          ],
+        ),
       ),
     ),
   );
 }
 
-// Updates Card
+// ✅ Updates Card
 Widget _updateCard(String name, String time, String content, String imageUrl) {
   return Container(
     padding: const EdgeInsets.all(12),
@@ -266,8 +376,7 @@ Widget _updateCard(String name, String time, String content, String imageUrl) {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name,
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
                 Text(time, style: const TextStyle(color: Colors.grey)),
               ],
             ),
@@ -282,7 +391,7 @@ Widget _updateCard(String name, String time, String content, String imageUrl) {
   );
 }
 
-// Chip
+
 Widget _chip(String text, bool selected) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
@@ -300,7 +409,6 @@ Widget _chip(String text, bool selected) {
   );
 }
 
-// Leaderboard Row
 class _leaderboardRow extends StatelessWidget {
   final String rank;
   final String player;
@@ -311,13 +419,40 @@ class _leaderboardRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(rank, style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(player),
-          Text(score, style: const TextStyle(fontWeight: FontWeight.bold)),
+
+          Expanded(
+            flex: 1,
+            child: Text(
+              rank,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.w500),
+            ),
+          ),
+
+
+          Expanded(
+            flex: 3,
+            child: Text(
+              player,
+              textAlign: TextAlign.left,
+              style: const TextStyle(color: Colors.black87),
+            ),
+          ),
+
+          Expanded(
+            flex: 2,
+            child: Text(
+              score,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
+            ),
+          ),
         ],
       ),
     );

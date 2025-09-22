@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sport_olymps/Login_Screen.dart';
 
+import 'CreatenewMatch_Screen.dart';
+
 
 
 class GetStartedScreen extends StatelessWidget {
@@ -162,7 +164,9 @@ class GetStartedScreen extends StatelessWidget {
 
               // Skip Button
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,MaterialPageRoute(builder: (context) => CreateMatchScreen(),));
+                },
                 child: const Text(
                   "Skip",
                   style: TextStyle(color: Colors.black54),
