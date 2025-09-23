@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Home_Screen.dart';
+import 'ProfileSetup_Screen.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -114,7 +115,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
+                        builder: (context) => const ProfileSetupScreen(),
                       ),
                     );
                   },

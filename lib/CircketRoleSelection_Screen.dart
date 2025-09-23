@@ -7,10 +7,7 @@ class RoleSelectionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () {},
-        ),
+
         title: const Text(
           'Select Your Role in Cricket',
           style: TextStyle(color: Colors.black),
