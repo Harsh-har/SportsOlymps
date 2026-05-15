@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "894912905678",
+    "project_id": "bharat-sports-olymps",
+    "storage_bucket": "bharat-sports-olymps.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894912905678:android:564386795f83d0c22cab9f",
+        "android_client_info": {
+          "package_name": "com.example.sport_olymps"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAx9NZh3SXeqrRsmrFtzE12m7o_ZLTlibQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

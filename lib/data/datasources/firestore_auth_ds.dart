@@ -1,0 +1,2 @@
+// Firestore auth data source
+

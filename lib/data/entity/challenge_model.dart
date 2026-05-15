@@ -1,0 +1,2 @@
+// Challenge entity model
+
